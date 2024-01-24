@@ -6,7 +6,7 @@
 /*   By: mbentahi <mbentahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 20:13:12 by mbentahi          #+#    #+#             */
-/*   Updated: 2024/01/20 15:56:11 by mbentahi         ###   ########.fr       */
+/*   Updated: 2024/01/22 18:06:53 by mbentahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	s2_len;
 	char	*str;
 
-	if (!s1)
+	if (!s1 && !s2)
 		return (ft_strdup(""));
 	if (!s1)
 		return (ft_strdup(s2));

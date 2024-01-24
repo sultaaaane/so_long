@@ -6,7 +6,7 @@
 /*   By: mbentahi <mbentahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 14:07:59 by mbentahi          #+#    #+#             */
-/*   Updated: 2024/01/19 18:53:55 by mbentahi         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:58:40 by mbentahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1000
+#  define BUFFER_SIZE 
 # endif
 
 # include <fcntl.h>

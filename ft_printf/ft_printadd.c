@@ -6,7 +6,7 @@
 /*   By: mbentahi <mbentahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 20:10:42 by mbentahi          #+#    #+#             */
-/*   Updated: 2024/01/18 20:57:02 by mbentahi         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:43:55 by mbentahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	ft_putlong_base(unsigned long nb)
 {
-	size_t	i;
+	size_t			i;
 	int				counter;
 	char			*base;
 

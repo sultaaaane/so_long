@@ -3,6 +3,10 @@ CC = cc
 
 SRC = 	window.c \
 		map_checker.c \
+		map_checker1.c \
+		map_checker2.c \
+		path_finder.c \
+		mlx_handler.c \
 
 OBJ = $(SRC:.c=.o)
 
@@ -12,7 +16,7 @@ $(NAME):$(OBJ)
 	@make -C libft
 	@make -C ft_printf
 	@make -C minilibx-linux
-	$(CC) $(SRC) -fsanitize=address -g3 ./ft_printf/libftprintf.a ./libft/libft.a ./minilibx-linux/libmlx_Linux.a -Imlx_linux -lXext -lX11 -o $(NAME)
+	$(CC) $(SRC) -Wall -Werror -Wextra -fsanitize=address -g3 ./ft_printf/libftprintf.a ./libft/libft.a ./minilibx-linux/libmlx_Linux.a -Imlx_linux -lXext -lX11 -o $(NAME)
 
 clean:
 	rm -rf $(OBJ)

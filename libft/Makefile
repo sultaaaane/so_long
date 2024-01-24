@@ -97,7 +97,7 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean bonus re
-
+.SECONDARY: $(OBJEC) $(BOBJEC)
 header :
 
 	@printf "$(RED)"
