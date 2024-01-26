@@ -6,7 +6,7 @@
 /*   By: mbentahi <mbentahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:11:31 by mbentahi          #+#    #+#             */
-/*   Updated: 2024/01/24 16:02:27 by mbentahi         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:39:43 by mbentahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	map_testing(t_map *map, char *file)
 		return (free(map), 0);
 	if (!map_input(map))
 		return (free(map), 0);
-	ft_printf("the map is good");
 	return (1);
 }
 

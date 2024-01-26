@@ -6,7 +6,7 @@
 /*   By: mbentahi <mbentahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 20:13:56 by mbentahi          #+#    #+#             */
-/*   Updated: 2024/01/24 17:14:15 by mbentahi         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:40:54 by mbentahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	line_counter(t_map *map, int fd)
 	{
 		free(line);
 		line = ft_replace_n(get_next_line(fd));
-		if (!line)
+		if (!line || !*line)
 			return (free(line), map->rows);
 		if (ft_strlen(line) != (size_t)map->commun_size)
 			return (free(line), perror("the map columns is not the same"), 0);
