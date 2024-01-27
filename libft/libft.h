@@ -6,7 +6,7 @@
 /*   By: mbentahi <mbentahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 16:06:19 by mbentahi          #+#    #+#             */
-/*   Updated: 2024/01/20 15:57:13 by mbentahi         ###   ########.fr       */
+/*   Updated: 2024/01/27 12:47:53 by mbentahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define LIBFT_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1000
+#  define BUFFER_SIZE 1
 # endif
 
 # include <stdio.h>

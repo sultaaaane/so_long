@@ -6,28 +6,20 @@
 /*   By: mbentahi <mbentahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:26:40 by mbentahi          #+#    #+#             */
-/*   Updated: 2024/01/26 16:55:27 by mbentahi         ###   ########.fr       */
+/*   Updated: 2024/01/27 11:55:59 by mbentahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int key_input(int keycode,t_mlx *mlx)
+int key_input(int keycode,t_mlx *mlx,t_map *map)
 {
 	if (keycode == 65307)
 	{
 		mlx_destroy_window(mlx->mlx,mlx->window);
 		exit(0);
 	}
-	if (keycode == 65362)
-		ft_printf("up");
-	if (keycode == 65364)
-		ft_printf("down");
-	if (keycode == 65361)
-		ft_printf("left");
-	if (keycode == 65363)
-		ft_printf("right");
-	ft_printf(" the key is %d\n",keycode);
+	key_input_handler(keycode,map);
 	return (keycode);
 }
 int close_window(t_mlx *mlx)

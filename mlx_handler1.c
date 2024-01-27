@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   mlx_handler1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbentahi <mbentahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/31 16:13:47 by mbentahi          #+#    #+#             */
-/*   Updated: 2024/01/27 12:42:34 by mbentahi         ###   ########.fr       */
+/*   Created: 2024/01/26 18:59:21 by mbentahi          #+#    #+#             */
+/*   Updated: 2024/01/27 09:34:56 by mbentahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "so_long.h"
 
-size_t	ft_strlen(const char *str)
+int key_input_handler(int keycode, t_map *map)
 {
-	size_t	i;
-
-	i = 0;
-	while (str && str[i])
-		i++;
-	return (i);
+	if (keycode == 65362)
+		move_player(map, 0, -1);
+	if (keycode == 65364)
+		move_player(map, 0, 1);
+	if (keycode == 65361)
+		move_player(map, -1, 0);
+	if (keycode == 65363)
+		move_player(map, 1, 0);
+	return (keycode);
 }

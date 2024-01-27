@@ -7,6 +7,9 @@ SRC = 	window.c \
 		map_checker2.c \
 		path_finder.c \
 		mlx_handler.c \
+		mlx_handler1.c \
+		player.c \
+		player1.c \
 
 OBJ = $(SRC:.c=.o)
 

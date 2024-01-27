@@ -6,7 +6,7 @@
 /*   By: mbentahi <mbentahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 16:44:55 by mbentahi          #+#    #+#             */
-/*   Updated: 2024/01/26 11:15:50 by mbentahi         ###   ########.fr       */
+/*   Updated: 2024/01/27 11:56:16 by mbentahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int map_input(t_map *map);
 int extention_check(char *file);
 int is_valid_move(t_map *map, int y, int x);
 int mlx_handler(t_map *map);
-int key_input(int keycode,t_mlx *mlx);
+int key_input(int keycode,t_mlx *mlx,t_map *map);
 int close_window(t_mlx *mlx);
 void texture_initializer(t_mlx *mlx,t_map *map);
 void display_texture(char c, t_mlx *mlx, int x, int y);
@@ -76,7 +76,8 @@ int is_exit(t_map *map, int x, int y);
 int is_player(t_map *map, int x, int y);
 int is_empty(t_map *map, int x, int y);
 int can_move(t_map *map, int x, int y);
-
-
+int key_input_handler(int keycode, t_map *map);
+int move_player(t_map *map, int x, int y);
+int can_move(t_map *map, int x, int y);
 
 #endif
