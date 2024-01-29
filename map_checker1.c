@@ -6,7 +6,7 @@
 /*   By: mbentahi <mbentahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 15:43:44 by mbentahi          #+#    #+#             */
-/*   Updated: 2024/01/24 15:03:06 by mbentahi         ###   ########.fr       */
+/*   Updated: 2024/01/29 13:26:53 by mbentahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,21 @@ int	collectable_checker(t_map *map)
 {
 	int	i;
 	int	j;
-	int		collectable;
 
 	i = 0;
 	j = 0;
-	collectable = 0;
 	while (i < map->rows)
 	{
 		j = 0;
 		while (j < map->commun_size)
 		{
 			if (map->map[i][j] == 'C')
-				collectable++;
+				map->collectables++;
 			j++;
 		}
 		i++;
 	}
-	if (collectable == 0)
+	if (map->collectables < 1)
 		return (free_2d(map->map, map),
 			perror("the map must have at least one collectable"), 0);
 	return (1);

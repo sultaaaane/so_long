@@ -6,20 +6,20 @@
 /*   By: mbentahi <mbentahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:26:40 by mbentahi          #+#    #+#             */
-/*   Updated: 2024/01/27 11:55:59 by mbentahi         ###   ########.fr       */
+/*   Updated: 2024/01/29 14:26:28 by mbentahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int key_input(int keycode,t_mlx *mlx,t_map *map)
+int key_input(int keycode,t_mlx *mlx)
 {
 	if (keycode == 65307)
 	{
 		mlx_destroy_window(mlx->mlx,mlx->window);
 		exit(0);
 	}
-	key_input_handler(keycode,map);
+	key_input_handler(keycode,mlx->map,mlx);
 	return (keycode);
 }
 int close_window(t_mlx *mlx)
@@ -66,30 +66,42 @@ void display_texture(char c, t_mlx *mlx, int x, int y)
 	else if (c == 'O')
 		mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->open_exit_texture, x , y );
 }
-
-int mlx_handler(t_map *map)
+int render_map(t_mlx *mlx,int flag)
 {
-	t_mlx	mlx;
 	int i;
 	int j;
 
 	i = 0;
+	while (mlx->map->map[i])
+	{
+		j = 0;
+		while (mlx->map->map[i][j])
+		{
+			display_texture(mlx->map->map[i][j], mlx, j * 32, i * 32);
+			j++;
+		}
+		i++;
+	}
+	if (flag == 1)
+	{
+		mlx->map->init_player.moves++;
+		ft_printf("%d\n",mlx->map->init_player.moves);
+	}
+	return (1);
+}
+
+int mlx_handler(t_map *map)
+{
+	t_mlx	mlx;
+	mlx.map = map;
+
 	mlx.mlx = mlx_init();
 	mlx.window = mlx_new_window(mlx.mlx, map->commun_size * 32,
 			map->rows * 32, "so_long");
 	mlx_key_hook(mlx.window, key_input, &mlx);
 	mlx_hook(mlx.window, 17,0, close_window, &mlx);
 	texture_initializer(&mlx,map);
-	while (map->map[i])
-	{
-		j = 0;
-		while (map->map[i][j])
-		{
-			display_texture(map->map[i][j], &mlx, j * 32, i * 32);
-			j++;
-		}
-		i++;
-	}
+	render_map(&mlx,0);
 	mlx_loop(mlx.mlx);
 	return (0);
 }

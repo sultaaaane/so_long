@@ -1,8 +1,7 @@
 NAME = so_long
 CC = cc
 
-SRC = 	window.c \
-		map_checker.c \
+SRC = 	map_checker.c \
 		map_checker1.c \
 		map_checker2.c \
 		path_finder.c \

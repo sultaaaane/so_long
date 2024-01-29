@@ -6,7 +6,7 @@
 /*   By: mbentahi <mbentahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 20:13:56 by mbentahi          #+#    #+#             */
-/*   Updated: 2024/01/27 14:21:06 by mbentahi         ###   ########.fr       */
+/*   Updated: 2024/01/28 20:20:35 by mbentahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,13 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (perror("usage: ./so_long map.ber"), 0);
 	if (!extention_check(av[1]))
-		return (0);
+		return (1);
 	map = (t_map *)malloc(sizeof(t_map));
 	if (!map)
-		return (0);
+		return (1);
 	map_initializer(map);
 	if (!map_testing(map, av[1]))
-		return (0);
+		return (1);
 	mlx_handler(map);
-	return (1);
+	return (0);
 }
