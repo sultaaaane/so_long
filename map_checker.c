@@ -6,7 +6,7 @@
 /*   By: mbentahi <mbentahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 20:13:56 by mbentahi          #+#    #+#             */
-/*   Updated: 2024/01/28 20:20:35 by mbentahi         ###   ########.fr       */
+/*   Updated: 2024/01/30 18:32:54 by mbentahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	line_counter(t_map *map, int fd)
 	{
 		free(line);
 		line = ft_replace_n(get_next_line(fd));
-		printf("%s pp \n", line);
 		if (!line)
 			return (free(line), map->rows);
 		if (ft_strlen(line) != (size_t)map->commun_size)
@@ -75,6 +74,8 @@ char	**map_reader(t_map *map, int fd)
 		line = ft_replace_n(get_next_line(fd));
 		if (!line)
 			return (map_free(map), free(line), NULL);
+		if (ft_strlen(line) != (size_t)map->commun_size)
+			return (free(line), perror("the map columns is not the same"), NULL);
 		map->map[i] = ft_strdup(line);
 		free(line);
 		i++;
@@ -87,6 +88,7 @@ char	**map_reader(t_map *map, int fd)
 int	main(int ac, char **av)
 {
 	t_map	*map;
+	t_point	start;
 
 	if (ac != 2)
 		return (perror("usage: ./so_long map.ber"), 0);
@@ -97,6 +99,10 @@ int	main(int ac, char **av)
 		return (1);
 	map_initializer(map);
 	if (!map_testing(map, av[1]))
+		return (1);
+	start.row = map->init_player.y;
+	start.col = map->init_player.x;
+	if (!bfs(map, start, &map->collectables) && map->collectables != map->init_player.collected)
 		return (1);
 	mlx_handler(map);
 	return (0);

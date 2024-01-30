@@ -18,7 +18,7 @@ $(NAME):$(OBJ)
 	@make -C libft
 	@make -C ft_printf
 	@make -C minilibx-linux
-	$(CC) $(SRC) -Wall -Werror -Wextra -fsanitize=address -g3 ./ft_printf/libftprintf.a ./libft/libft.a ./minilibx-linux/libmlx_Linux.a -Imlx_linux -lXext -lX11 -o $(NAME)
+	$(CC) $(SRC)  -fsanitize=address -g3 ./ft_printf/libftprintf.a ./libft/libft.a ./minilibx-linux/libmlx_Linux.a -Imlx_linux -lXext -lX11 -o $(NAME)
 
 clean:
 	rm -rf $(OBJ)

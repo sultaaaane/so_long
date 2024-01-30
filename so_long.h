@@ -6,7 +6,7 @@
 /*   By: mbentahi <mbentahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 16:44:55 by mbentahi          #+#    #+#             */
-/*   Updated: 2024/01/29 14:32:06 by mbentahi         ###   ########.fr       */
+/*   Updated: 2024/01/30 18:33:42 by mbentahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ typedef struct s_mlx
 	t_map *map;
 } t_mlx;
 
+typedef struct s_point{
+    int row;
+    int col;
+} t_point;
 
 char **map_reader(t_map *map,int fd);
 char *ft_replace_n(char *line);
@@ -65,7 +69,6 @@ void	map_initializer(t_map *map);
 int map_testing(t_map *map,char *file);
 int map_input(t_map *map);
 int extention_check(char *file);
-int is_valid_move(t_map *map, int y, int x);
 int mlx_handler(t_map *map);
 int key_input(int keycode,t_mlx *mlx);
 int close_window(t_mlx *mlx);
@@ -80,4 +83,18 @@ int key_input_handler(int keycode, t_map *map, t_mlx *mlx);
 void move_player(t_mlx *mlx,t_map *map, int x, int y);
 int can_move(t_mlx *mlx, t_map *map, int x, int y);
 int render_map(t_mlx *mlx,int flag);
+
+
+int is_valid_move(t_map *map , char **visited, int y, int x);
+int bfs(t_map *map, t_point start, int *collectibles);
+char **visited_initializer(t_map *map);
+
+
+
+
+
+
+
+
+
 #endif
