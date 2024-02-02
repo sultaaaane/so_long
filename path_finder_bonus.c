@@ -6,19 +6,11 @@
 /*   By: mbentahi <mbentahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 15:09:24 by mbentahi          #+#    #+#             */
-/*   Updated: 2024/02/02 23:38:15 by mbentahi         ###   ########.fr       */
+/*   Updated: 2024/02/02 18:23:19 by mbentahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-// dir struct fiha all the variables that you need bach tnormi
-
-typedef struct s_
-{
-    /* data */
-};
-
 
 int is_valid_move(t_map *map, char **visited, int y, int x) {
     return y >= 0 && y < map->rows && x >= 0 && x < map->commun_size
@@ -51,35 +43,12 @@ char **visited_initializer(t_map *map)
     return (visited);
 }
 
-void while_bfs(t_map *map, t_point *current,t_point *queue,char **visited)
-{
-    int i;
-    int next_row;
-    int next_col;
-    t_point next_point;
-    t_point row_direction[] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-    i = 0;
-    
-    while (i < 4)
-    {
-        next_row = current->row + row_direction[i].row;
-        next_col = current->col + row_direction[i].col;
-
-            if (is_valid_move(map, visited, next_row, next_col)) {
-                visited[next_row][next_col] = 'V';
-                next_point = {next_row, next_col};
-                queue[rear++] = next_point;
-            }
-            i++;
-        }
-}
-
 int bfs(t_map *map, t_point start, int *collectibles) {
     char **visited = visited_initializer(map);
     char **temp = visited_initializer(map);
     int i;
     visited[start.row][start.col] = 'V';
-
+    t_point row_direction[] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
     t_point queue[map->rows * map->commun_size];
     int front = 0, rear = 0;
@@ -96,7 +65,19 @@ int bfs(t_map *map, t_point start, int *collectibles) {
         } else if (map->map[current.row][current.col] == 'E') {
             exit_reached = 1;
         }
-        
+        i = 0;
+        while (i < 4)
+        {
+            int next_row = current.row + row_direction[i].row;
+            int next_col = current.col + row_direction[i].col;
+
+            if (is_valid_move(map, visited, next_row, next_col)) {
+                visited[next_row][next_col] = 'V';
+                t_point next_point = {next_row, next_col};
+                queue[rear++] = next_point;
+            }
+            i++;
+        }
     }
     ft_printf("%d %d\n",*collectibles,map->collectables);
     free_2d(visited, map);
