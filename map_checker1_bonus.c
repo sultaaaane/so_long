@@ -6,11 +6,11 @@
 /*   By: mbentahi <mbentahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 15:43:44 by mbentahi          #+#    #+#             */
-/*   Updated: 2024/02/02 23:17:41 by mbentahi         ###   ########.fr       */
+/*   Updated: 2024/02/08 15:04:45 by mbentahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	map_initializer(t_map *map)
 {

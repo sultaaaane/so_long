@@ -6,7 +6,7 @@
 /*   By: mbentahi <mbentahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:13:25 by mbentahi          #+#    #+#             */
-/*   Updated: 2024/02/02 18:04:33 by mbentahi         ###   ########.fr       */
+/*   Updated: 2024/02/07 23:28:40 by mbentahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	can_move(t_mlx *mlx, t_map *map, int x, int y)
 		close_window(mlx);
 		exit(0);
 	}
+	map->init_player.moves++;
 	return (0);
 }
 

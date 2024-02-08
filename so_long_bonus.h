@@ -6,7 +6,7 @@
 /*   By: mbentahi <mbentahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 16:44:55 by mbentahi          #+#    #+#             */
-/*   Updated: 2024/02/02 18:45:02 by mbentahi         ###   ########.fr       */
+/*   Updated: 2024/02/07 23:38:48 by mbentahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ typedef struct s_player
 	int frames;
 } t_player;
 
+typedef struct s_enemies
+{
+	int y;
+	int x;
+} t_enemies;
+
 typedef struct s_map 
 {
 	char **map;
@@ -35,6 +41,7 @@ typedef struct s_map
 	int collectables;
 	int commun_size;
 	t_player init_player;
+	int enemie_counter;
 } t_map;
 
 typedef struct s_mlx
@@ -47,7 +54,13 @@ typedef struct s_mlx
     void *collectible_texture;
     void *exit_texture;
 	void *open_exit_texture;
-    void *player_texture;
+    void *player_texture[3];
+	void *enemie_texture[4];
+	char *player_path[3];
+	char *enemie_path[4];
+	unsigned int player_frame;
+	unsigned int enemie_frame;
+	int frame;
 	t_map *map;
 } t_mlx;
 
@@ -55,6 +68,20 @@ typedef struct s_point{
     int row;
     int col;
 } t_point;
+
+typedef struct s_data
+{
+	t_point	start;
+	t_point	*queue;
+	t_point	next_point;
+	t_point	current;
+	t_point	row_direction[4];
+	int		rear;
+	int		front;
+	int		exit_reached;
+}			t_data;
+
+
 
 typedef struct s_queue {
     t_point *array;
@@ -91,14 +118,13 @@ int is_empty(t_map *map, int x, int y);
 int key_input_handler(int keycode, t_map *map, t_mlx *mlx);
 void move_player(t_mlx *mlx,t_map *map, int x, int y);
 int can_move(t_mlx *mlx, t_map *map, int x, int y);
-int render_map(t_mlx *mlx,int flag);
-
-
+int render_map(t_mlx *mlx);
+void texture_path(t_mlx *mlx);
+void player_enemies_init(t_mlx *mlx,t_map *map);
 int is_valid_move(t_map *map , char **visited, int y, int x);
 int bfs(t_map *map, t_point start, int *collectibles);
 char **visited_initializer(t_map *map);
-
-
+int display_loop(t_mlx *mlx);
 
 
 

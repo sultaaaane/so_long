@@ -6,7 +6,7 @@
 /*   By: mbentahi <mbentahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 20:13:56 by mbentahi          #+#    #+#             */
-/*   Updated: 2024/02/02 18:25:48 by mbentahi         ###   ########.fr       */
+/*   Updated: 2024/02/07 14:49:38 by mbentahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,9 @@ int	main(int ac, char **av)
 		return (1);
 	start.col = map->init_player.y;
 	start.row = map->init_player.x;
-	if (!bfs(map, start, &collectibles) && collectibles == map->collectables)
-		return (ft_printf("Player cannot win.\n"), 1);
+	if (!bfs(map, start, &collectibles) || collectibles != map->collectables)
+		return (free_2d(map->map, map), free(map),
+			ft_printf("Player cannot win.\n"), 1);
 	mlx_handler(map);
 	return (0);
 }

@@ -6,100 +6,109 @@
 /*   By: mbentahi <mbentahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 15:09:24 by mbentahi          #+#    #+#             */
-/*   Updated: 2024/02/02 23:38:15 by mbentahi         ###   ########.fr       */
+/*   Updated: 2024/02/07 13:57:28 by mbentahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// dir struct fiha all the variables that you need bach tnormi
-
-typedef struct s_
+int	is_valid_move(t_map *map, char **visited, int y, int x)
 {
-    /* data */
-};
-
-
-int is_valid_move(t_map *map, char **visited, int y, int x) {
-    return y >= 0 && y < map->rows && x >= 0 && x < map->commun_size
-           && visited[y][x] != 'V' && visited[y][x] != '1';
+	return (y >= 0 && y < map->rows && x >= 0 && x < map->commun_size
+		&& visited[y][x] != 'V' && visited[y][x] != '1');
 }
 
-char **visited_initializer(t_map *map)
+char	**visited_initializer(t_map *map)
 {
-    int y;
-    int x;
-    char **visited;
-    y = 0;
-    visited = malloc(sizeof(char *) * map->rows);
-    while (y < map->rows)
-    {
-        visited[y] = malloc(sizeof(char) * map->commun_size);
-        y++;
-    }
-    y = 0;
-    while (y < map->rows)
-    {
-        x = 0;
-        while (x < map->commun_size)
-        {
-            visited[y][x] = map->map[y][x];
-            x++;
-        }
-        y++;
-    }
-    return (visited);
+	int		y;
+	int		x;
+	char	**visited;
+
+	y = 0;
+	visited = malloc(sizeof(char *) * map->rows);
+	while (y < map->rows)
+	{
+		visited[y] = malloc(sizeof(char) * map->commun_size);
+		y++;
+	}
+	y = 0;
+	while (y < map->rows)
+	{
+		x = 0;
+		while (x < map->commun_size)
+		{
+			visited[y][x] = map->map[y][x];
+			x++;
+		}
+		y++;
+	}
+	return (visited);
 }
 
-void while_bfs(t_map *map, t_point *current,t_point *queue,char **visited)
+void	t_data_init(t_data *data, t_map *map)
 {
-    int i;
-    int next_row;
-    int next_col;
-    t_point next_point;
-    t_point row_direction[] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-    i = 0;
-    
-    while (i < 4)
-    {
-        next_row = current->row + row_direction[i].row;
-        next_col = current->col + row_direction[i].col;
-
-            if (is_valid_move(map, visited, next_row, next_col)) {
-                visited[next_row][next_col] = 'V';
-                next_point = {next_row, next_col};
-                queue[rear++] = next_point;
-            }
-            i++;
-        }
+	data->queue = (t_point *)malloc(sizeof(t_point) * map->commun_size
+			* map->rows);
+	data->row_direction[0].col = 0;
+	data->row_direction[0].row = 1;
+	data->row_direction[1].col = 0;
+	data->row_direction[1].row = -1;
+	data->row_direction[2].col = 1;
+	data->row_direction[2].row = 0;
+	data->row_direction[3].col = -1;
+	data->row_direction[3].row = 0;
+	data->current.col = map->commun_size;
+	data->current.row = map->rows;
+	data->front = 0;
+	data->rear = 0;
+	data->exit_reached = 0;
 }
 
-int bfs(t_map *map, t_point start, int *collectibles) {
-    char **visited = visited_initializer(map);
-    char **temp = visited_initializer(map);
-    int i;
-    visited[start.row][start.col] = 'V';
+void	while_bfs(t_map *map, t_data *data, char **visited)
+{
+	int	i;
+	int	next_row;
+	int	next_col;
 
+	i = 0;
+	while (i < 4)
+	{
+		next_row = data->current.row + data->row_direction[i].row;
+		next_col = data->current.col + data->row_direction[i].col;
+		if (is_valid_move(map, visited, next_row, next_col))
+		{
+			visited[next_row][next_col] = 'V';
+			data->next_point.col = next_col;
+			data->next_point.row = next_row;
+			data->queue[data->rear++] = data->next_point;
+		}
+		i++;
+	}
+}
 
-    t_point queue[map->rows * map->commun_size];
-    int front = 0, rear = 0;
-    queue[rear++] = start;
+int	bfs(t_map *map, t_point start, int *collectibles)
+{
+	t_data	data;
+	char	**visited;
+	char	**temp;
 
-
-    int exit_reached = 0;
-
-    while (front != rear) {
-        t_point current = queue[front++];
-        if (map->map[current.row][current.col] == 'C') {
-            (*collectibles)++;
-            temp[current.row][current.col] = '0';
-        } else if (map->map[current.row][current.col] == 'E') {
-            exit_reached = 1;
-        }
-        
-    }
-    ft_printf("%d %d\n",*collectibles,map->collectables);
-    free_2d(visited, map);
-    free_2d(temp, map);
-    return (exit_reached);
+	t_data_init(&data, map);
+	visited = visited_initializer(map);
+	temp = visited_initializer(map);
+	visited[start.row][start.col] = 'V';
+	data.queue[data.rear++] = start;
+	while (data.front != data.rear)
+	{
+		data.current = data.queue[data.front++];
+		if (map->map[data.current.row][data.current.col] == 'C')
+		{
+			(*collectibles)++;
+			temp[data.current.row][data.current.col] = '0';
+		}
+		else if (map->map[data.current.row][data.current.col] == 'E')
+			data.exit_reached = 1;
+		while_bfs(map, &data, visited);
+	}
+	free(data.queue);
+	return (free_2d(temp, map), free_2d(visited, map), data.exit_reached);
 }

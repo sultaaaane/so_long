@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_checker.c                                      :+:      :+:    :+:   */
+/*   map_checker_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbentahi <mbentahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 20:13:56 by mbentahi          #+#    #+#             */
-/*   Updated: 2024/02/02 18:25:48 by mbentahi         ###   ########.fr       */
+/*   Updated: 2024/02/08 15:07:20 by mbentahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 char	*ft_replace_n(char *line)
 {
@@ -107,9 +107,9 @@ int	main(int ac, char **av)
 	map_initializer(map);
 	if (!map_testing(map, av[1]))
 		return (1);
-	start.col = map->init_player.y;
-	start.row = map->init_player.x;
-	if (!bfs(map, start, &collectibles) && collectibles == map->collectables)
+	start.row = map->init_player.y;
+	start.col = map->init_player.x;
+	if (!bfs(map, start, &collectibles) || collectibles != map->collectables)
 		return (ft_printf("Player cannot win.\n"), 1);
 	mlx_handler(map);
 	return (0);

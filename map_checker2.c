@@ -6,7 +6,7 @@
 /*   By: mbentahi <mbentahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:11:31 by mbentahi          #+#    #+#             */
-/*   Updated: 2024/02/02 18:06:41 by mbentahi         ###   ########.fr       */
+/*   Updated: 2024/02/07 13:35:34 by mbentahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,15 @@ int	map_testing(t_map *map, char *file)
 	if (fd == -1)
 		return (free(map), perror("the second file didn't open"), 0);
 	if (!map_reader(map, fd))
-		return (free(map), perror("the map is not valid"), 0);
+		return (free_2d(map->map,map) ,free(map),perror("the map is not valid"), 0);
 	if (!border_checker(map))
-		return (free(map), 0);
+		return (free_2d(map->map,map), free(map), 0);
 	if (!player_checker(map))
-		return (free(map), 0);
+		return (free_2d(map->map,map) ,free(map), 0);
 	if (!collectable_checker(map))
-		return (free(map), 0);
+		return (free_2d(map->map,map) ,free(map), 0);
 	if (!exit_checker(map))
-		return (free(map), 0);
+		return (free_2d(map->map,map) ,free(map), 0);
 	if (!map_input(map))
 		return (free(map), 0);
 	return (1);

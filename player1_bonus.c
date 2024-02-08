@@ -6,11 +6,11 @@
 /*   By: mbentahi <mbentahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:13:25 by mbentahi          #+#    #+#             */
-/*   Updated: 2024/02/02 18:38:24 by mbentahi         ###   ########.fr       */
+/*   Updated: 2024/02/07 23:38:08 by mbentahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 int	can_move(t_mlx *mlx, t_map *map, int x, int y)
 {
@@ -19,6 +19,11 @@ int	can_move(t_mlx *mlx, t_map *map, int x, int y)
 	if (is_wall(map, x, y) || is_exit(map, x, y))
 		return (1);
 	if (is_open_exit(map, x, y))
+	{
+		close_window(mlx);
+		exit(0);
+	}
+	if (map->map[y][x] == 'X')
 	{
 		close_window(mlx);
 		exit(0);
@@ -38,7 +43,6 @@ void	move_player(t_mlx *mlx, t_map *map, int x, int y)
 			map->init_player.x = x;
 			map->init_player.y = y;
 			map->map[map->init_player.y][map->init_player.x] = 'P';
-			render_map(mlx, 1);
 		}
 		else if (is_collectible(map, x, y))
 		{
@@ -50,7 +54,7 @@ void	move_player(t_mlx *mlx, t_map *map, int x, int y)
 			map->init_player.collected++;
 			if (map->collectables == 0)
 				map->map[map->exit_y][map->exit_x] = 'O';
-			render_map(mlx, 1);
 		}
+		map->init_player.moves++;
 	}
 }

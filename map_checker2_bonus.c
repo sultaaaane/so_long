@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_checker2.c                                     :+:      :+:    :+:   */
+/*   map_checker2_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbentahi <mbentahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:11:31 by mbentahi          #+#    #+#             */
-/*   Updated: 2024/02/02 18:06:41 by mbentahi         ###   ########.fr       */
+/*   Updated: 2024/02/07 22:49:57 by mbentahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	free_2d(char **map, t_map *map1)
 {
@@ -67,9 +67,9 @@ int	map_input(t_map *map)
 		{
 			if (map->map[i][j] != '1' && map->map[i][j] != 'P'
 				&& map->map[i][j] != 'C' && map->map[i][j] != 'E'
-				&& map->map[i][j] != '0')
+				&& map->map[i][j] != '0' && map->map[i][j] != 'X')
 				return (free_2d(map->map, map),
-					perror("the map should only contain 1 0 P C E"), 0);
+					perror("the map should only contain 1 0 P C E X"), 0);
 			j++;
 		}
 		i++;

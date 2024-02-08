@@ -6,7 +6,7 @@
 /*   By: mbentahi <mbentahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 16:44:55 by mbentahi          #+#    #+#             */
-/*   Updated: 2024/02/02 18:12:08 by mbentahi         ###   ########.fr       */
+/*   Updated: 2024/02/03 22:53:51 by mbentahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,18 @@ typedef struct s_point
 	int			col;
 }				t_point;
 
-typedef struct s_queue
+typedef struct s_data
 {
-	t_point		*array;
-	int			front;
-	int			rear;
-	int			size;
-}				t_queue;
+	t_point	start;
+	t_point	*queue;
+	t_point	next_point;
+	t_point	current;
+	t_point	row_direction[4];
+	int		rear;
+	int		front;
+	int		exit_reached;
+}			t_data;
+
 
 char			**map_reader(t_map *map, int fd);
 char			*ft_replace_n(char *line);
